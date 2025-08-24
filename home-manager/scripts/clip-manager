@@ -1,0 +1,9 @@
+#!/bin/sh
+
+cliphist_output=$(cliphist list)
+selected=$(echo "$cliphist_output" | awk -F'\t' '{print $2}' | rofi -dmenu -i)
+
+# Если что-то выбрано, ищем полную строку и декодируем
+if [ -n "$selected" ]; then
+  echo "$cliphist_output" | grep -F "$selected" | cliphist decode | wl-copy
+fi
