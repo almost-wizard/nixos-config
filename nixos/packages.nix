@@ -27,7 +27,6 @@
 		obsidian
 
 		# --- соц. и утилиты ---
-		discord
 		telegram-desktop
 		firefox
 

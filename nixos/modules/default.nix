@@ -6,10 +6,10 @@
 		./hyprland.nix
 		./nm.nix
 		./nekoray.nix
+		./power-management.nix
 		./sddm.nix
 		./sound.nix
 		./ssh.nix
-		# ./swap.nix
 		./user.nix
 	];
 }

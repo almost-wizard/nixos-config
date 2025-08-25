@@ -17,12 +17,18 @@
 		in {
 		nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
 			inherit system;
-			modules = [ ./nixos/configuration.nix ];
-		};
+			modules = [
+				./nixos/configuration.nix
 
-		homeConfigurations.alex = home-manager.lib.homeManagerConfiguration {
-			pkgs = nixpkgs.legacyPackages.${system};
-			modules = [ ./home-manager/home.nix ];
+				home-manager.nixosModules.home-manager
+
+				{
+					home-manager.useGlobalPkgs = true;
+					home-manager.useUserPackages = true;
+
+					home-manager.users.alex = import ./home-manager/home.nix;
+				}
+			];
 		};
 	};
 }
