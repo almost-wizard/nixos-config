@@ -2,6 +2,7 @@
 	imports = [
 		./bootloader.nix
 		./bluetooth.nix
+		./env.nix
 		./gc.nix
 		./hyprland.nix
 		./nm.nix

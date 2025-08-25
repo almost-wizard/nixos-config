@@ -4,6 +4,8 @@
 	nixpkgs.config.allowUnfree = true;
 
 	environment.systemPackages = with pkgs; [
+		hyprland
+		waybar
 		rofi-wayland
 
 		# --- основные тулзы ---
@@ -15,6 +17,7 @@
 		neovim
 		fastfetch
 		ranger
+		pavucontrol
 
 		# --- разработка: языки и тулчейн ---
 		python3
