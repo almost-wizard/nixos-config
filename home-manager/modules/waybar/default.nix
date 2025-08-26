@@ -1,10 +1,8 @@
 {
-	imports = [
-		./style.nix
-	];
-	
 	programs.waybar = {
 		enable = true;
+		style = ./style.css;
+		
 		settings = {
 			mainBar = {
 				layer = "top";
@@ -97,8 +95,8 @@
 
 				battery = {
 					states = {
-							warning = 30;
-							critical = 15;
+						warning = 30;
+						critical = 15;
 					};
 					format = "{capacity}% {icon}";
 					format-charging = "{capacity}% ";
@@ -113,7 +111,6 @@
 				# 	spacing = 0;
 				# };
 
-				style = ./style.css;
 			};
 		};
 	};

@@ -8,7 +8,7 @@ in
 	powerManagement.enable = true;
 
 	# Enable better suspend mode
-	boot.kernelParams = ["mem_sleep_default=deep"];
+	# boot.kernelParams = ["mem_sleep_default=deep"];
 	boot.resumeDevice = device;
 	
 	services = {	

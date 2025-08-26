@@ -10,7 +10,6 @@
 
 window#waybar {
 	background: transparent;
-	height: 20px;           /* panelHeight */
 }
 
 window#waybar.hidden {
