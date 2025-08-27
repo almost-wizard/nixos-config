@@ -1,57 +1,62 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-unstable, inputs, ... }:
 
 {
 	nixpkgs.config.allowUnfree = true;
 
-	environment.systemPackages = with pkgs; [
-		hyprland
+	environment.systemPackages = with pkgs-unstable; [
 		waybar
-		rofi-wayland
+	] ++ (with pkgs; [
+		# --- Wayland / DE ---
+		pkgs.hyprland
+		pkgs.rofi-wayland
+		pkgs.wofi
 
 		# --- основные тулзы ---
-		git
-		wget
-		curl
-		unzip
-		htop
-		neovim
-		fastfetch
-		ranger
-		pavucontrol
+		pkgs.git
+		pkgs.wget
+		pkgs.curl
+		pkgs.unzip
+		pkgs.htop
+		pkgs.neovim
+		pkgs.fastfetch
+		pkgs.ranger
+		pkgs.pavucontrol
+		pkgs.nwg-look
 
 		# --- разработка: языки и тулчейн ---
-		python3
-		python3Packages.pip
-		python3Packages.virtualenv
-		docker
+		pkgs.python3
+		pkgs.python3Packages.pip
+		pkgs.python3Packages.virtualenv
+		pkgs.docker
 
 		# --- IDE / редакторы ---
-		vscode
-		obsidian
+		pkgs.vscode
+		pkgs.obsidian
 
 		# --- соц. и утилиты ---
-		telegram-desktop
-		firefox
+		pkgs.telegram-desktop
+		pkgs.firefox
 
 		# --- системное удобство ---
-		#alacritty
-		fish
-		tree
-		
-		# Text editors
-		vim
-		micro
+		# pkgs.alacritty
+		pkgs.fish
+		pkgs.tree
 
-		# Network
-		nekoray
-		
-		# Sound
-		pipewire
+		# --- Text editors ---
+		pkgs.vim
+		pkgs.micro
 
-		# Utils
-		wl-clipboard
-		cliphist
-	];
+		# --- Network ---
+		pkgs.nekoray
+
+		# --- Sound ---
+		pkgs.pipewire
+
+		# --- Utils ---
+		pkgs.wl-clipboard
+		pkgs.cliphist
+	]);
+
 
 	fonts.packages = with pkgs; [
 		jetbrains-mono

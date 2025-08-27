@@ -1,117 +1,142 @@
+{ config, pkgs, pkgs-unstable, ... }:
+
 {
 	programs.waybar = {
 		enable = true;
-		style = ./style.css;
-		
-		settings = {
-			mainBar = {
-				layer = "top";
-				position = "top";
-				margin = "9 13 -10 18";
+		package = pkgs-unstable.waybar;
 
-				modules-left = ["hyprland/workspaces" "hyprland/language" "keyboard-state" "hyprland/submap"];
-				modules-center = ["clock"];
-				modules-right = ["pulseaudio" "custom/mem" "cpu" "backlight" "battery"];
+		style = builtins.readFile ./style.css;
 
-				"hyprland/workspaces" = {
-					disable-scroll = true;
-				};
+		settings = [{
+			layer = "top";
+			position = "top";
+			height = 30;
+			margin = "10px 10px 0 10px";
 
-				"hyprland/language" = {
-					format-en = "US";
-					format-ru = "RU";
-					min-length = 5;
-					tooltip = false;
-				};
+			# Размещение модулей
+			modules-left   = [ "custom/filesystem" "hyprland/workspaces" ];
+			modules-center = [ "temperature" "memory" "cpu" ];
+			modules-right  = [ "tray" "battery" "backlight" "pulseaudio" "hyprland/language" "keyboard-state" "clock" "network" "custom/powermenu"];
 
-				"keyboard-state" = {
-					#numlock = true;
-					capslock = true;
-					format = "{icon} ";
-					format-icons = {
-							locked = " ";
-							unlocked = "";
-					};
-				};
 
-				"clock" = {
-					# timezone = "America/New_York";
-					tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-					format = "{:%a; %d %b, %I:%M %p}";
-				};
 
-				"pulseaudio" = {
-					# scroll-step = 1; # %, can be a float
-					reverse-scrolling = 1;
-					format = "{volume}% {icon} {format_source}";
-					format-bluetooth = "{volume}% {icon} {format_source}";
-					format-bluetooth-muted = " {icon} {format_source}";
-					format-muted = " {format_source}";
-					format-source = "{volume}% ";
-					format-source-muted = "";
-					format-icons = {
-						headphone = "";
-						hands-free = "";
-						headset = "";
-						phone = "";
-						portable = "";
-						car = "";
-						default = ["" "" ""];
-					};
-					on-click = "pavucontrol";
-					min-length = 13;
-				};
+			# === Модули ===
 
-				"custom/mem" = {
-					format = "{} ";
-					interval = 3;
-					exec = "free -h | awk '/Mem:/{printf $3}'";
-					tooltip = false;
-				};
-
-				"cpu" = {
-					interval = 2;
-					format = "{usage}% ";
-					min-length = 6;
-				};
-
-				"temperature" = {
-					# thermal-zone = 2;
-					# hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
-					critical-threshold = 130;
-					# format-critical = "{temperatureC}°C {icon}";
-					format = "{temperatureC}°C {icon}";
-					format-icons = ["" "" "" "" ""];
-					tooltip = false;
-				};
-
-				"backlight" = {
-					reverse-scrolling = 1;
-					device = "intel_backlight";
-					format = "{percent}% {icon}";
-					format-icons = [""];
-					min-length = 7;
-				};
-
-				battery = {
-					states = {
-						warning = 30;
-						critical = 15;
-					};
-					format = "{capacity}% {icon}";
-					format-charging = "{capacity}% ";
-					format-plugged = "{capacity}% ";
-					format-alt = "{time} {icon}";
-					format-icons = ["" "" "" "" "" "" "" "" "" ""];
-					#on-update = "$HOME/.config/waybar/scripts/check_battery.sh";
-				};
-
-				# tray = {
-				# 	icon-size = 16;
-				# 	spacing = 0;
-				# };
-
+			"tray" = {
+				spacing = 8;
 			};
-		};
+
+			"custom/filesystem" = {
+				format = " ";
+				on-click = "wofi --show drun";
+				tooltip = false;
+			};
+
+			"hyprland/workspaces" = {
+				format = "{icon}";
+				format-icons = {
+					"1" = "";
+					"2" = "";
+					"3" = "";
+					"4" = "";
+					"5" = "";
+					default = "";
+					empty = "";
+					persistent = "";
+				};
+
+				persistent-workspaces = {
+					"*" = 5;
+				};
+			};
+
+			# CPU
+			cpu = {
+				interval = 2;
+				format = " {usage} %";
+			};
+
+			# Память
+			memory = {
+				interval = 2;
+				format = " {used:0.2f} GiB";
+			};
+
+			# Температура
+			temperature = {
+				thermal-zone = 18;
+				format = " {temperatureC} °C";
+				critical-threshold = 70;
+			};
+
+			# Батарея
+			battery = {
+				bat = "BAT0";
+				adapter = "ACAD";
+				interval = 5;
+				format = "{icon} {capacity}%";
+				format-charging = " {capacity}%";
+				format-icons = ["" "" "" "" ""];
+			};
+
+			# Звук (Alsa → Pulseaudio)
+			pulseaudio = {
+				reverse-scrolling = 1;
+				format = "{icon} {volume}%";
+				format-muted = "󰖁";
+				format-icons = {
+					default = [ "󰖀" "󰖀" "󰕾" "󰕾" ];
+				};
+				on-click = "pavucontrol";
+			};
+
+			"hyprland/language" = {
+				format = "{}";
+			    format-en = "us";
+			    format-ru = "ru";
+	            tooltip = true;
+	            tooltip-format = "{long}";
+			};
+			
+			"keyboard-state" = {
+				numlock = false;
+				scrollock = false;
+				capslock = true;
+				format = "{icon}";
+			    format-icons = {
+			        locked = "!";
+			        unlocked = "";
+			    };
+			};
+
+			# Часы
+			clock = {
+				interval = 60;
+				format = " {:%H:%M}";
+				format-alt = " {:%a, %d %b %Y}";
+				tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+			};
+
+			# Яркость
+			backlight = {
+				reverse-scrolling = 1;
+				device = "intel_backlight";
+				format = " {percent}%";
+			};
+
+			# Сеть (wifi/ethernet)
+			network = {
+				format-wifi = "";
+				format-ethernet = "󰈁";
+				format-disconnected = "󰖪";
+				tooltip-format = "{essid} via {gwaddr}";
+			};
+
+			# Power Menu (кастом)
+			"custom/powermenu" = {
+				format = " ";
+				on-click = "~/bin/powermenu";
+			};
+		}];
 	};
 }

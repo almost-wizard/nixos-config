@@ -10,6 +10,8 @@
 			name = "Papirus-Dark"; 
 			package = pkgs.papirus-icon-theme;
 		};
+
+		# Cursor sets in hyprland config at `exec-once` block
 		cursorTheme = {
 			name = "Bibata-Modern-Ice";
 			package = pkgs.bibata-cursors;

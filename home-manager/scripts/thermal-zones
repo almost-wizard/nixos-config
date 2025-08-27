@@ -1,0 +1,1 @@
+for z in /sys/class/thermal/thermal_zone*; do [ -f /sys/class/thermal/thermal_zone9/type ] && echo thermal_zone9 - SEN8; done
