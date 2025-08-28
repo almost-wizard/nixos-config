@@ -3,6 +3,7 @@
 		./bootloader.nix
 		./bluetooth.nix
 		./env.nix
+		./flatpak.nix
 		./gc.nix
 		./hyprland.nix
 		./nm.nix

@@ -14,6 +14,8 @@
 				enable_stdout_logs = true;
 			};
 
+			# monitor = "eDP-1, 2520x1680@90, 0x0, 1.75";
+
 			exec-once = [
 				"waybar"
 				"hyprctl setcursor Bibata-Modern-Ice 20"

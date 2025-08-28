@@ -6,55 +6,47 @@
 	environment.systemPackages = with pkgs-unstable; [
 		waybar
 	] ++ (with pkgs; [
-		# --- Wayland / DE ---
-		pkgs.hyprland
-		pkgs.rofi-wayland
-		pkgs.wofi
+		hyprland
+		rofi-wayland
+		wofi
 
-		# --- основные тулзы ---
-		pkgs.git
-		pkgs.wget
-		pkgs.curl
-		pkgs.unzip
-		pkgs.htop
-		pkgs.neovim
-		pkgs.fastfetch
-		pkgs.ranger
-		pkgs.pavucontrol
-		pkgs.nwg-look
+		krita
 
-		# --- разработка: языки и тулчейн ---
-		pkgs.python3
-		pkgs.python3Packages.pip
-		pkgs.python3Packages.virtualenv
-		pkgs.docker
+		git
+		wget
+		curl
+		unzip
+		htop
+		neovim
+		fastfetch
+		ranger
+		pavucontrol
+		nwg-look
 
-		# --- IDE / редакторы ---
-		pkgs.vscode
-		pkgs.obsidian
+		python3
+		python3Packages.pip
+		python3Packages.virtualenv
+		docker
 
-		# --- соц. и утилиты ---
-		pkgs.telegram-desktop
-		pkgs.firefox
+		vscode
+		obsidian
 
-		# --- системное удобство ---
-		# pkgs.alacritty
-		pkgs.fish
-		pkgs.tree
+		telegram-desktop
+		firefox
 
-		# --- Text editors ---
-		pkgs.vim
-		pkgs.micro
+		alacritty
+		fish
+		tree
 
-		# --- Network ---
-		pkgs.nekoray
+		vim
+		micro
 
-		# --- Sound ---
-		pkgs.pipewire
+		nekoray
 
-		# --- Utils ---
-		pkgs.wl-clipboard
-		pkgs.cliphist
+		pipewire
+
+		wl-clipboard
+		cliphist
 	]);
 
 

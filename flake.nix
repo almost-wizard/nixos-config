@@ -12,7 +12,7 @@
 		};
 	};
 
-	outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }:
+	outputs = { nixpkgs, nixpkgs-unstable, home-manager, nix-flatpak, ... }:
 		let
 			system = "x86_64-linux";
 			pkgs = import nixpkgs {
