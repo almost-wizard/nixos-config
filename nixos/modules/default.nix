@@ -1,9 +1,9 @@
 {
 	imports = [
 		./bootloader.nix
+		# ./xserver.nix
 		./bluetooth.nix
 		./env.nix
-		./flatpak.nix
 		./gc.nix
 		./hyprland.nix
 		./nm.nix

@@ -6,22 +6,32 @@
 	environment.systemPackages = with pkgs-unstable; [
 		waybar
 	] ++ (with pkgs; [
+		alacritty
+		bspwm
+		sxhkd
+		picom
+		polybar
+		feh
+		rofi
+		flameshot
+		xorg.xrandr
+		xorg.xsetroot
+	
 		hyprland
 		rofi-wayland
 		wofi
-
-		krita
+		nwg-look
 
 		git
 		wget
 		curl
+		tree
 		unzip
 		htop
 		neovim
 		fastfetch
 		ranger
 		pavucontrol
-		nwg-look
 
 		python3
 		python3Packages.pip
@@ -33,10 +43,6 @@
 
 		telegram-desktop
 		firefox
-
-		alacritty
-		fish
-		tree
 
 		vim
 		micro
